@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7ff">
+    <title>MediStudy — Belajar Kesehatan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+    <!-- Halaman login -->
+    <section class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="brand-logo">M<span>+</span></div>
+            <p class="eyebrow">TEMAN BELAJAR KESEHATAN</p>
+            <h1>Mulai belajar<br>lebih terarah.</h1>
+            <p class="muted">
+                Pelajari materi kesehatan, catat hal penting, dan pantau
+                perkembangan belajarmu.
+            </p>
+
+            <form id="loginForm">
+                <label for="usernameInput">Nama kamu</label>
+                <input
+                    id="usernameInput"
+                    type="text"
+                    placeholder="Masukkan nama"
+                    maxlength="40"
+                    required
+                >
+                <button class="btn btn-primary full-width" type="submit">
+                    Masuk ke MediStudy →
+                </button>
+            </form>
+
+            <p class="small muted">Demo lokal · Tidak memerlukan akun online</p>
+        </div>
+    </section>
+
+    <!-- Aplikasi utama -->
+    <div class="app-shell hidden" id="appShell">
+        <aside class="sidebar" id="sidebar">
+            <a href="#" class="brand" data-page="dashboard">
+                <span class="brand-logo">M<span>+</span></span>
+                <span>
+                    <strong>MediStudy</strong>
+                    <small>Health learning space</small>
+                </span>
+            </a>
+
+            <p class="nav-label">MENU UTAMA</p>
+            <nav class="navigation">
+                <button class="nav-link active" data-page="dashboard">
+                    <span>⌂</span> Dashboard
+                </button>
+                <button class="nav-link" data-page="materi">
+                    <span>▤</span> Jelajah Materi
+                </button>
+                <button class="nav-link" data-page="catatan">
+                    <span>✎</span> Catatan Saya
+                </button>
+                <button class="nav-link" data-page="kalender">
+                    <span>▦</span> Kalender Belajar
+                </button>
+                <button class="nav-link" data-page="latihan">
+                    <span>✓</span> Latihan Soal
+                </button>
+                <button class="nav-link" data-page="progres">
+                    <span>↗</span> Progres Belajar
+                </button>
+            </nav>
+
+            <p class="nav-label">AKUN</p>
+            <button class="nav-link" data-page="profil">
+                <span>◎</span> Profil Saya
+            </button>
+
+            <div class="sidebar-bottom">
+                <div class="mini-profile">
+                    <div class="avatar avatar-small" id="sidebarAvatar">M</div>
+                    <div class="profile-text">
+                        <strong id="sidebarName">Pengguna</strong>
+                        <small>Student</small>
+                    </div>
+                    <button class="icon-button" id="logoutButton" title="Keluar">
+                        ↗
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <button class="icon-button menu-toggle" id="menuToggle"
+                        aria-label="Buka menu">☰</button>
+                <div>
+                    <p class="eyebrow">MEDISTUDY / LEARNING SPACE</p>
+                    <h2 id="pageHeading">Dashboard</h2>
+                </div>
+                
+                <button type="button" id="themeToggle" class="theme-toggle" aria-label="Aktifkan mode gelap">
+                    <span id="themeIcon">🌙</span>
+                    <span id="themeLabel">Mode Gelap</span>
+                </button>
+            </header>
+
+            <!-- Dashboard -->
+            <section class="page active" id="page-dashboard">
+                <div class="dashboard-page">
+
+                    <!-- Sapaan -->
+                    <section class="dashboard-welcome">
+                        <div class="welcome-copy">
+                            <span class="dashboard-eyebrow">
+                                YOUR LEARNING SPACE
+                            </span>
+
+                            <h1>Terus berkembang, <span id="welcomeName">Pengguna</span> 👋</h1>
+
+                            <p>
+                                Belajar sedikit demi sedikit hari ini,
+                                untuk pemahaman yang lebih baik esok hari.
+                            </p>
+
+                            <div class="welcome-date">
+                                <span>📅</span>
+                                <span id="todayLabel">Hari ini</span>
+                            </div>
+                        </div>
+
+                        <div class="welcome-illustration" aria-hidden="true">
+                            <div class="welcome-orbit orbit-one"></div>
+                            <div class="welcome-orbit orbit-two"></div>
+                            <div class="welcome-book">📚</div>
+                            <span class="floating-icon floating-heart">💗</span>
+                            <span class="floating-icon floating-sparkle">✦</span>
+                        </div>
+                    </section>
+
+                    <!-- Statistik -->
+                    <section class="dashboard-stats">
+                        <article class="dashboard-stat stat-purple">
+                            <div class="dashboard-stat-top">
+                                <span>Materi selesai</span>
+                                <span class="stat-emoji">📖</span>
+                            </div>
+                            <strong id="statCompleted">0</strong>
+                            <p>Topik telah dituntaskan</p>
+                        </article>
+
+                        <article class="dashboard-stat stat-green">
+                            <div class="dashboard-stat-top">
+                                <span>Progres belajar</span>
+                                <span class="stat-emoji">🎯</span>
+                            </div>
+                            <strong id="statProgress">0%</strong>
+                            <p>Perjalanan belajarmu</p>
+                        </article>
+
+                        <article class="dashboard-stat stat-orange">
+                            <div class="dashboard-stat-top">
+                                <span>Latihan soal</span>
+                                <span class="stat-emoji">✍️</span>
+                            </div>
+                            <strong id="statQuizzes">0</strong>
+                            <p>Percobaan latihan</p>
+                        </article>
+
+                        <article class="dashboard-stat stat-pink">
+                            <div class="dashboard-stat-top">
+                                <span>Catatan saya</span>
+                                <span class="stat-emoji">📝</span>
+                            </div>
+                            <strong id="statNotes">0</strong>
+                            <p>Catatan tersimpan</p>
+                        </article>
+                    </section>
+
+                    <!-- Area konten utama -->
+                    <div class="dashboard-content-grid">
+
+                        <section class="dashboard-panel learning-panel">
+                            <div class="dashboard-section-heading">
+                                <div>
+                                    <span class="dashboard-eyebrow">KEEP IT UP</span>
+                                    <h2>Perjalanan belajarmu</h2>
+                                    <p>Pantau perkembangan belajarmu di MediStudy.</p>
+                                </div>
+                                <span class="section-heading-icon">🌱</span>
+                            </div>
+
+                            <div class="learning-highlight">
+                                <div class="learning-highlight-icon">🧠</div>
+                                <div>
+                                    <h3>Setiap langkah itu berarti</h3>
+                                    <p>
+                                        Selesaikan materi secara bertahap.
+                                        Konsistensi lebih penting daripada terburu-buru.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="learning-progress-heading">
+                                <span>Keseluruhan materi</span>
+                                <strong id="dashboardProgressText">0%</strong>
+                            </div>
+
+                            <div class="dashboard-progress-track">
+                                <div
+                                    id="dashboardProgressBar"
+                                    class="dashboard-progress-fill"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                            <p class="dashboard-progress-caption" id="dashboardProgressCaption">
+                                0 dari 12 submateri selesai
+                            </p>
+
+                            <button
+                                type="button"
+                                class="btn btn-primary dashboard-main-button"
+                                data-page="materi"
+                            >
+                                Jelajahi materi <span>→</span>
+                            </button>
+                        </section>
+
+                        <section class="dashboard-panel quick-panel">
+                            <div class="dashboard-section-heading">
+                                <div>
+                                    <span class="dashboard-eyebrow">QUICK ACCESS</span>
+                                    <h2>Akses cepat</h2>
+                                    <p>Lanjutkan aktivitas belajarmu.</p>
+                                </div>
+                            </div>
+
+                            <button class="quick-action" type="button" data-page="materi">
+                                <span class="quick-action-icon quick-purple">📚</span>
+                                <span class="quick-action-copy">
+                                    <strong>Jelajah materi</strong>
+                                    <small>Pelajari topik kesehatan</small>
+                                </span>
+                                <span class="quick-arrow">→</span>
+                            </button>
+
+                            <button class="quick-action" type="button" data-page="latihan">
+                                <span class="quick-action-icon quick-orange">✍️</span>
+                                <span class="quick-action-copy">
+                                    <strong>Latihan soal</strong>
+                                    <small>Uji pemahamanmu</small>
+                                </span>
+                                <span class="quick-arrow">→</span>
+                            </button>
+
+                            <button class="quick-action" type="button" data-page="catatan">
+                                <span class="quick-action-icon quick-green">📝</span>
+                                <span class="quick-action-copy">
+                                    <strong>Catatan saya</strong>
+                                    <small>Simpan hal penting</small>
+                                </span>
+                                <span class="quick-arrow">→</span>
+                            </button>
+
+                            <button class="quick-action" type="button" data-page="kalender">
+                                <span class="quick-action-icon quick-pink">📅</span>
+                                <span class="quick-action-copy">
+                                    <strong>Jadwal belajar</strong>
+                                    <small>Atur agenda belajarmu</small>
+                                </span>
+                                <span class="quick-arrow">→</span>
+                            </button>
+                        </section>
+                    </div>
+
+                    <!-- Rekomendasi -->
+                    <section class="dashboard-panel recommendation-panel">
+                        <div class="dashboard-section-heading recommendation-heading">
+                            <div>
+                                <span class="dashboard-eyebrow">PICK UP WHERE YOU LEFT OFF</span>
+                                <h2>Rekomendasi untukmu</h2>
+                                <p>Materi pilihan untuk melanjutkan perjalanan belajarmu.</p>
+                            </div>
+
+                            <button
+                                class="btn btn-secondary"
+                                type="button"
+                                data-page="materi"
+                            >
+                                Lihat semua →
+                            </button>
+                        </div>
+
+                        <div id="dashboardCourses" class="dashboard-course-list"></div>
+                    </section>
+
+                </div>
+            </section>
+
+            <!-- Jelajah materi -->
+            <section class="page" id="page-materi">
+                <div class="page-intro">
+                    <p class="eyebrow">PERPUSTAKAAN DIGITAL</p>
+                    <h1>Jelajahi materi kesehatan</h1>
+                    <p>Temukan topik yang ingin kamu pelajari hari ini.</p>
+                </div>
+
+                <div class="search-row">
+                    <div class="search-box">
+                        <span>⌕</span>
+                        <input id="courseSearch" type="search"
+                               placeholder="Cari materi atau topik...">
+                    </div>
+                    <select id="categoryFilter" aria-label="Filter kategori">
+                        <option value="Semua">Semua kategori</option>
+                        <option value="Anatomi">Anatomi</option>
+                        <option value="Gizi">Gizi</option>
+                        <option value="Pertolongan Pertama">Pertolongan Pertama</option>
+                        <option value="Kesehatan Umum">Kesehatan Umum</option>
+                    </select>
+                </div>
+
+                <div class="course-grid" id="courseGrid"></div>
+                <p class="empty-state hidden" id="courseEmpty">
+                    Materi tidak ditemukan. Coba kata kunci lain.
+                </p>
+            </section>
+
+            <!-- Catatan -->
+            <section class="page" id="page-catatan">
+                <div class="page-intro">
+                    <p class="eyebrow">RUANG PRIBADI</p>
+                    <h1>Catatan saya</h1>
+                    <p>Simpan rangkuman dan hal penting dari setiap materi.</p>
+                </div>
+
+                <form class="panel note-form" id="noteForm">
+                    <label for="noteTitle">Judul catatan</label>
+                    <input id="noteTitle" type="text"
+                           placeholder="Contoh: Sistem pernapasan" maxlength="100" required>
+                    <label for="noteContent">Isi catatan</label>
+                    <textarea id="noteContent" rows="5"
+                              placeholder="Tulis rangkuman belajarmu di sini..."
+                              maxlength="10000" required></textarea>
+                    <div class="form-footer">
+                        <span class="small muted">Catatan tersimpan di browser ini.</span>
+                        <button class="btn btn-primary" type="submit">Simpan catatan</button>
+                    </div>
+                </form>
+
+                <div class="note-grid" id="notesGrid"></div>
+                <p class="empty-state hidden" id="notesEmpty">
+                    Belum ada catatan. Buat catatan pertamamu di atas.
+                </p>
+            </section>
+
+            <!-- Kalender -->
+            <section class="page" id="page-kalender">
+                <div class="page-intro">
+                    <p class="eyebrow">ATUR WAKTU</p>
+                    <h1>Kalender belajar</h1>
+                    <p>Rencanakan sesi belajar agar lebih konsisten.</p>
+                </div>
+
+                <form class="panel event-form" id="eventForm">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="eventTitle">Agenda belajar</label>
+                            <input id="eventTitle" type="text"
+                                   placeholder="Contoh: Belajar anatomi" required maxlength="100">
+                        </div>
+                        <div class="form-field">
+                            <label for="eventDate">Tanggal</label>
+                            <input id="eventDate" type="date" required>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Tambah agenda +</button>
+                </form>
+
+                <div class="panel">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">JADWAL KAMU</p>
+                            <h3>Agenda belajar</h3>
+                        </div>
+                    </div>
+                    <div id="eventsList" class="events-list"></div>
+                    <p class="empty-state hidden" id="eventsEmpty">Belum ada agenda belajar.</p>
+                </div>
+            </section>
+
+            <!-- Latihan -->
+            <section class="page" id="page-latihan">
+                <div class="page-intro">
+                    <p class="eyebrow">UJI PEMAHAMAN</p>
+                    <h1>Latihan soal</h1>
+                    <p>Jawab pertanyaan berikut untuk menguji pengetahuanmu.</p>
+                </div>
+
+                <div class="quiz-layout">
+                    <section class="panel quiz-panel" id="quizPanel">
+                        <div class="quiz-meta">
+                            <span class="pill">Pengetahuan umum</span>
+                            <span id="quizCounter">Soal 1 dari 5</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="quizProgress"></div>
+                        </div>
+                        <h2 id="quizQuestion"></h2>
+                        <div class="quiz-options" id="quizOptions"></div>
+                        <p id="quizFeedback" class="quiz-feedback" aria-live="polite"></p>
+                        <div class="quiz-footer">
+                            <span class="muted small" id="quizScore">Skor: 0</span>
+                            <button class="btn btn-primary" id="quizNext" disabled>
+                                Berikutnya →
+                            </button>
+                        </div>
+                    </section>
+
+                    <aside class="panel quiz-side">
+                        <div class="stat-icon green">✓</div>
+                        <h3>Belajar dengan latihan</h3>
+                        <p class="muted">
+                            Baca setiap pertanyaan dengan teliti. Setelah memilih jawaban,
+                            kamu akan mendapatkan umpan balik.
+                        </p>
+                        <button class="btn btn-secondary full-width" id="restartQuiz">
+                            Ulangi latihan
+                        </button>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- Progres -->
+            <section class="page" id="page-progres">
+                <div class="page-intro">
+                    <p class="eyebrow">PERKEMBANGANMU</p>
+                    <h1>Progres belajar</h1>
+                    <p>Pantau materi yang sudah kamu selesaikan.</p>
+                </div>
+
+                <div class="progress-summary panel">
+                    <div>
+                        <p class="eyebrow">TOTAL PROGRES</p>
+                        <h2 id="progressHeadline">0%</h2>
+                        <p class="muted" id="progressDescription">Mulai pelajari materi pertamamu.</p>
+                    </div>
+                    <div class="progress-ring" id="progressRing">
+                        <span id="progressRingText">0%</span>
+                    </div>
+                </div>
+
+                <section class="panel">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">RINCIAN</p>
+                            <h3>Progres setiap materi</h3>
+                        </div>
+                    </div>
+                    <div id="progressList" class="progress-list"></div>
+                </section>
+            </section>
+
+            <!-- Profil -->
+            <section class="page" id="page-profil">
+                <div class="page-intro">
+                    <p class="eyebrow">AKUN KAMU</p>
+                    <h1>Profil saya</h1>
+                    <p>Kelola informasi dan foto profilmu.</p>
+                </div>
+
+                <section class="panel profile-panel">
+                    <div class="profile-cover"></div>
+                    <div class="profile-main">
+                        <div class="profile-photo-wrap">
+                            <img class="profile-photo hidden" id="profilePhoto" alt="Foto profil">
+                            <div class="avatar profile-avatar" id="profileAvatar">M</div>
+                            <button class="photo-edit-button" id="changePhotoButton"
+                                    type="button" title="Ganti foto">✎</button>
+                        </div>
+                        <div class="profile-heading">
+                            <h2 id="profileDisplayName">Pengguna</h2>
+                            <p class="muted">Anggota MediStudy</p>
+                        </div>
+                        <button class="btn btn-secondary" id="changePhotoButtonAlt" type="button">
+                            Ganti foto
+                        </button>
+                    </div>
+
+                    <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp"
+                           class="hidden">
+
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="profileName">Nama lengkap</label>
+                                <input id="profileName" type="text" maxlength="40" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="profileGoal">Target belajar</label>
+                                <select id="profileGoal">
+                                    <option value="15 menit sehari">15 menit sehari</option>
+                                    <option value="30 menit sehari">30 menit sehari</option>
+                                    <option value="1 jam sehari">1 jam sehari</option>
+                                    <option value="2 jam sehari">2 jam sehari</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="profileAbout">Tentang saya</label>
+                            <textarea id="profileAbout" rows="3" maxlength="500"
+                                      placeholder="Ceritakan sedikit tentang dirimu..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Simpan profil</button>
+                    </form>
+                </section>
+            </section>
+
+            <footer class="app-footer">
+                <span>© <span id="yearLabel"></span> MediStudy</span>
+                <span>Belajar hari ini, lebih siap esok hari.</span>
+            </footer>
+        </main>
+    </div>
+
+    
+    <!-- Modal pembaca materi MediStudy -->
+    <div class="modal-backdrop hidden" id="lessonModal">
+        <article
+            class="modal-card lesson-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="lessonTitle"
+        >
+            <button
+                class="modal-close"
+                id="closeLesson"
+                aria-label="Tutup"
+            >×</button>
+
+            <span class="pill" id="lessonCategory"></span>
+            <h2 id="lessonTitle"></h2>
+            <p class="muted" id="lessonDescription"></p>
+
+            <!-- Navigasi subbab -->
+            <section class="lesson-navigation">
+                <h3>Daftar Subbab</h3>
+                <div
+                    class="lesson-chapter-list"
+                    id="lessonChapterList"
+                    aria-label="Pilih subbab"
+                ></div>
+            </section>
+
+            <!-- Isi materi -->
+            <div class="lesson-content" id="lessonContent"></div>
+
+            <!-- Navigasi sebelumnya dan berikutnya -->
+            <div class="lesson-pagination">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="previousLesson"
+                >
+                    ← Sebelumnya
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="nextLesson"
+                >
+                    Berikutnya →
+                </button>
+            </div>
+
+            <!-- Status progres -->
+            <div class="lesson-footer">
+                <span class="small muted" id="lessonStatus"></span>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="completeLesson"
+                >
+                    Tandai selesai ✓
+                </button>
+            </div>
+        </article>
+    </div>
+
+    <!-- Modal editor crop foto profil -->
+    <div class="crop-modal hidden" id="cropModal" role="dialog"
+         aria-modal="true" aria-labelledby="cropTitle">
+        <div class="crop-dialog">
+            <div class="crop-header">
+                <div>
+                    <p class="eyebrow">FOTO PROFIL</p>
+                    <h2 id="cropTitle">Atur foto kamu</h2>
+                </div>
+                <button class="modal-close" id="closeCrop" type="button"
+                        aria-label="Tutup editor">×</button>
+            </div>
+
+            <p class="muted small">
+                Geser foto untuk mengatur posisi. Gunakan zoom untuk memperbesar
+                atau memperkecil foto.
+            </p>
+
+            <div class="crop-stage" id="cropStage">
+                <img id="cropImage" alt="Pratinjau foto yang sedang diatur"
+                     draggable="false">
+                <div class="crop-guide"></div>
+            </div>
+
+            <div class="crop-controls">
+                <label for="cropZoom">Perbesar foto</label>
+                <input id="cropZoom" type="range" min="1" max="3" step="0.01" value="1">
+            </div>
+
+            <p class="crop-hint">Pastikan wajah berada di tengah lingkaran.</p>
+
+            <div class="crop-actions">
+                <button class="btn btn-ghost" id="cancelCrop" type="button">Batal</button>
+                <button class="btn btn-primary" id="saveCrop" type="button">Simpan foto</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
